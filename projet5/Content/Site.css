@@ -45,8 +45,8 @@ textarea {
     margin-bottom: 1px;
 }
 
-.title{
-   /* padding-right: 0;
+/*title{
+    padding-right: 0;
     padding-left: 0;
     margin: auto;
     height: auto;
@@ -58,11 +58,11 @@ textarea {
     -webkit-box-shadow: 0.7ex 0.7ex 1ex rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0.7ex 0.7ex 1ex rgba(0, 0, 0, 0.4);
     box-shadow: 0.7ex 0.7ex 1ex rgba(0, 0, 0, 0.4);
-    pointer-events: none;*/
+    pointer-events: none;
     z-index: 2;
      height: 7em;
      font-size: larger;
-   }
+   }*/
 .legend {
     float: left;
     display: inline-block;

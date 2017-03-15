@@ -1,7 +1,7 @@
 ﻿
 <script src="~/Scripts/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="~/Scripts/MyScripts/Competences.js" charset="utf-8" ></script>
-<script type="text/javascript" src="tooltip.js"></script>
+<script type="text/javascript" src="~/Scripts/MyScripts/tooltip.js"></script>
 <script type="text/html" id="data" charset="utf-8">
    @Html.Raw(ViewBag.VB)
 </script>
@@ -208,6 +208,7 @@ ViewBag.Title = "Projet5";
                     }
                 }
             </div>
+            <div id="tooltip" style="left: -91px; top: -91px; visibility: hidden;">Tooltip</div>
         </main>
             <footer>
                 <div class="container-fluid col-sm-12 col-md-12 col-lg-12" id="footer">
@@ -223,5 +224,5 @@ ViewBag.Title = "Projet5";
                     <select id="etudiants" />
                 </div>
     </footer>
-    <div id="tooltip" style="left: -91px; top: -91px; visibility: hidden;">Tooltip</div>
+    
 </div>

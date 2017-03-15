@@ -1,4 +1,6 @@
-﻿var tooltip = {
+﻿$(document).ready (function () {
+  
+var tooltip = {
 
     /* НАЧАЛО НАСТРОЕК */
     options: {
@@ -135,3 +137,4 @@ if (root) {
     if (root.addEventListener) root.addEventListener("load", tooltip.d, false);
     else if (root.attachEvent) root.attachEvent("onload", tooltip.d);
 }
+});
