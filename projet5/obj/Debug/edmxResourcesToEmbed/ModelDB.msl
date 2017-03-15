@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище projet5ModelContainer" CdmEntityContainer="DbConnection">
+    <EntitySetMapping Name="competences">
+      <EntityTypeMapping TypeName="projet5Model.competence">
+        <MappingFragment StoreEntitySet="competences">
+          <ScalarProperty Name="Competence_id" ColumnName="Competence_id" />
+          <ScalarProperty Name="Semestre" ColumnName="Semestre" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="WWW" ColumnName="WWW" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="competuds">
+      <EntityTypeMapping TypeName="projet5Model.competud">
+        <MappingFragment StoreEntitySet="competud">
+          <ScalarProperty Name="CompEtud_CompetenceId" ColumnName="CompEtud_CompetenceId" />
+          <ScalarProperty Name="CompEtud_EtudiantId" ColumnName="CompEtud_EtudiantId" />
+          <ScalarProperty Name="CompEtud_Etat" ColumnName="CompEtud_Etat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cours">
+      <EntityTypeMapping TypeName="projet5Model.cour">
+        <MappingFragment StoreEntitySet="cours">
+          <ScalarProperty Name="Cours_id" ColumnName="Cours_id" />
+          <ScalarProperty Name="Cours_nom" ColumnName="Cours_nom" />
+          <ScalarProperty Name="Cours_lien" ColumnName="Cours_lien" />
+          <ScalarProperty Name="Cours_desc" ColumnName="Cours_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="etudiants">
+      <EntityTypeMapping TypeName="projet5Model.etudiant">
+        <MappingFragment StoreEntitySet="etudiants">
+          <ScalarProperty Name="identifiant" ColumnName="identifiant" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="annee" ColumnName="annee" />
+          <ScalarProperty Name="parcours" ColumnName="parcours" />
+          <ScalarProperty Name="domaine" ColumnName="domaine" />
+          <ScalarProperty Name="mel" ColumnName="mel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="professeurs">
+      <EntityTypeMapping TypeName="projet5Model.professeur">
+        <MappingFragment StoreEntitySet="professeurs">
+          <ScalarProperty Name="Professeur_id" ColumnName="Professeur_id" />
+          <ScalarProperty Name="Professeur_prenom" ColumnName="Professeur_prenom" />
+          <ScalarProperty Name="Professeur_nom" ColumnName="Professeur_nom" />
+          <ScalarProperty Name="Professeur_mail" ColumnName="Professeur_mail" />
+          <ScalarProperty Name="Professeur_password" ColumnName="Professeur_password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="compcours" TypeName="projet5Model.compcours" StoreEntitySet="compcours">
+      <EndProperty Name="cours">
+        <ScalarProperty Name="Cours_id" ColumnName="CompCours_CoursId" />
+      </EndProperty>
+      <EndProperty Name="competences">
+        <ScalarProperty Name="Competence_id" ColumnName="CompCours_CompId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="compparent" TypeName="projet5Model.compparent" StoreEntitySet="compparent">
+      <EndProperty Name="competences">
+        <ScalarProperty Name="Competence_id" ColumnName="CompParent_SonId" />
+      </EndProperty>
+      <EndProperty Name="competences1">
+        <ScalarProperty Name="Competence_id" ColumnName="CompParent_FatherId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="compresp" TypeName="projet5Model.compresp" StoreEntitySet="compresp">
+      <EndProperty Name="competences">
+        <ScalarProperty Name="Competence_id" ColumnName="CompResp_CompId" />
+      </EndProperty>
+      <EndProperty Name="professeurs">
+        <ScalarProperty Name="Professeur_id" ColumnName="CompResp_ProfId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="coursetud" TypeName="projet5Model.coursetud" StoreEntitySet="coursetud">
+      <EndProperty Name="cours">
+        <ScalarProperty Name="Cours_id" ColumnName="CoursEtud_CoursId" />
+      </EndProperty>
+      <EndProperty Name="etudiants">
+        <ScalarProperty Name="identifiant" ColumnName="CoursEtud_EtudiantId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="coursprof" TypeName="projet5Model.coursprof" StoreEntitySet="coursprof">
+      <EndProperty Name="cours">
+        <ScalarProperty Name="Cours_id" ColumnName="CoursProf_CoursId" />
+      </EndProperty>
+      <EndProperty Name="professeurs">
+        <ScalarProperty Name="Professeur_id" ColumnName="CoursProf_ProfId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

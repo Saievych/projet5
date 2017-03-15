@@ -1,0 +1,163 @@
+﻿
+body{
+    padding-top: 0px;
+    padding-bottom: 20px;
+    overflow:no-display;
+}
+/* Set padding to keep content from hitting the edges 
+  
+*/
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+#footer {
+    position: fixed; 
+    left: 0; 
+    bottom: 0; 
+    padding: 1%; 
+    background: #39b54a; 
+    width: 100%; 
+    z-index: 2;
+   }
+
+#header{
+    padding: 2.5%;
+    background: #d1d4d9;
+    border: 1px solid #000;
+    height: auto;
+    width: 100%;
+    z-index: 5;
+    margin-bottom: 1px;
+}
+
+.title{
+   /* padding-right: 0;
+    padding-left: 0;
+    margin: auto;
+    height: auto;
+    font-size: 1.1vw;
+    padding: 0ex 1ex;
+    -webkit-border-radius: 1ex;
+    -moz-border-radius: 1ex;
+    border-radius: 1ex;
+    -webkit-box-shadow: 0.7ex 0.7ex 1ex rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0.7ex 0.7ex 1ex rgba(0, 0, 0, 0.4);
+    box-shadow: 0.7ex 0.7ex 1ex rgba(0, 0, 0, 0.4);
+    pointer-events: none;*/
+    z-index: 2;
+     height: 7em;
+     font-size: larger;
+   }
+.legend {
+    float: left;
+    display: inline-block;
+}
+
+
+#divcenter{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+}
+
+.semester{
+    float: left;
+    left: 0;
+    right: 0;
+    display: block;
+    /*height: 95% !important*/;
+    width: 10%;
+    height: calc(100vh - 75px); 
+    overflow-y: auto;
+}
+
+.course{
+   cursor: pointer;
+   background: greenyellow;
+   top: -10px;
+   margin-top: 25px;
+   border-radius: 5px;
+   /*position:relative;*/
+   width: calc(100% - 20%);
+}
+.center{
+    display: block;
+   margin-left: auto;
+   margin-right: auto
+}
+.circle {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background: darkgray;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    float: left;
+     margin-left: 5px;
+}
+
+#circleLg {
+    float:left;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+}
+
+/*.tooltip { /* стиль текста, наведя или нажав на который появится пояснение 
+  display: inline-block;
+  position: relative;
+  background: #E6E6E6; /* цвет фона 
+  text-indent: 0px;
+  cursor: help; /* вид курсора 
+}
+.tooltip > div { /* стиль появляющейся подсказки 
+  position: absolute;
+  bottom: 100%;
+  left: -20em; /* = max-width */
+  /*right: -20em; /* = max-width */
+  /*width: -moz-max-content;
+  width: -webkit-max-content;
+  width: max-content;  /* ширина подсказки может быть не более содержимого */
+ /* max-width: 20em;  /* ширина подсказки может быть не более 20em */
+ /* max-height: 80vh; /* необязательное ограничение по высоте подсказки, 1vh — это 1% от ширины окна */
+  /*overflow: auto;
+  visibility: hidden;
+  margin: 0 auto .4em; /* поднята на .4em над текстом, наведя или нажав на который появится пояснение */
+  /*padding: .3em;
+  border: solid rgb(200,200,200);
+  font-size: 90%;
+  background: #fff;
+  line-height: normal;
+  cursor: auto;
+}*/
+
+ #tooltip {
+	background: #FFFFFF;
+	border: 1px solid #666666;
+	color: #333333;
+	margin: 0px;
+	padding: 3px 5px;
+	position: absolute;
+	visibility: hidden;
+	}

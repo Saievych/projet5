@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище projet5Model" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="compcours">
+    <Key>
+      <PropertyRef Name="CompCours_CompId" />
+      <PropertyRef Name="CompCours_CoursId" />
+    </Key>
+    <Property Name="CompCours_CompId" Type="int" Nullable="false" />
+    <Property Name="CompCours_CoursId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="competences">
+    <Key>
+      <PropertyRef Name="Competence_id" />
+    </Key>
+    <Property Name="Competence_id" Type="int" Nullable="false" />
+    <Property Name="Semestre" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Code" Type="char" MaxLength="12" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="202" />
+    <Property Name="WWW" Type="varchar" MaxLength="52" />
+  </EntityType>
+  <EntityType Name="competud">
+    <Key>
+      <PropertyRef Name="CompEtud_CompetenceId" />
+      <PropertyRef Name="CompEtud_EtudiantId" />
+    </Key>
+    <Property Name="CompEtud_CompetenceId" Type="int" Nullable="false" />
+    <Property Name="CompEtud_EtudiantId" Type="int" Nullable="false" />
+    <Property Name="CompEtud_Etat" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="compparent">
+    <Key>
+      <PropertyRef Name="CompParent_SonId" />
+      <PropertyRef Name="CompParent_FatherId" />
+    </Key>
+    <Property Name="CompParent_SonId" Type="int" Nullable="false" />
+    <Property Name="CompParent_FatherId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="compresp">
+    <Key>
+      <PropertyRef Name="CompResp_CompId" />
+      <PropertyRef Name="CompResp_ProfId" />
+    </Key>
+    <Property Name="CompResp_CompId" Type="int" Nullable="false" />
+    <Property Name="CompResp_ProfId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="cours">
+    <Key>
+      <PropertyRef Name="Cours_id" />
+    </Key>
+    <Property Name="Cours_id" Type="int" Nullable="false" />
+    <Property Name="Cours_nom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cours_lien" Type="varchar" MaxLength="100" />
+    <Property Name="Cours_desc" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="coursetud">
+    <Key>
+      <PropertyRef Name="CoursEtud_CoursId" />
+      <PropertyRef Name="CoursEtud_EtudiantId" />
+    </Key>
+    <Property Name="CoursEtud_CoursId" Type="int" Nullable="false" />
+    <Property Name="CoursEtud_EtudiantId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="coursprof">
+    <Key>
+      <PropertyRef Name="CoursProf_CoursId" />
+      <PropertyRef Name="CoursProf_ProfId" />
+    </Key>
+    <Property Name="CoursProf_CoursId" Type="int" Nullable="false" />
+    <Property Name="CoursProf_ProfId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="etudiants">
+    <Key>
+      <PropertyRef Name="identifiant" />
+    </Key>
+    <Property Name="identifiant" Type="int" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="prenom" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="annee" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="parcours" Type="varchar" MaxLength="10" />
+    <Property Name="domaine" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="mel" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="professeurs">
+    <Key>
+      <PropertyRef Name="Professeur_id" />
+    </Key>
+    <Property Name="Professeur_id" Type="int" Nullable="false" />
+    <Property Name="Professeur_prenom" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="Professeur_nom" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="Professeur_mail" Type="varchar" MaxLength="35" />
+    <Property Name="Professeur_password" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <Association Name="fk_COMPCOURS1">
+    <End Role="cours" Type="Self.cours" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="compcours" Type="Self.compcours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cours">
+        <PropertyRef Name="Cours_id" />
+      </Principal>
+      <Dependent Role="compcours">
+        <PropertyRef Name="CompCours_CoursId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COMPCOURS2">
+    <End Role="competences" Type="Self.competences" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="compcours" Type="Self.compcours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="competences">
+        <PropertyRef Name="Competence_id" />
+      </Principal>
+      <Dependent Role="compcours">
+        <PropertyRef Name="CompCours_CompId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COMPETUD">
+    <End Role="competences" Type="Self.competences" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="competud" Type="Self.competud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="competences">
+        <PropertyRef Name="Competence_id" />
+      </Principal>
+      <Dependent Role="competud">
+        <PropertyRef Name="CompEtud_CompetenceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COMPETUD2">
+    <End Role="etudiants" Type="Self.etudiants" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="competud" Type="Self.competud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="etudiants">
+        <PropertyRef Name="identifiant" />
+      </Principal>
+      <Dependent Role="competud">
+        <PropertyRef Name="CompEtud_EtudiantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COMPPAR1">
+    <End Role="competences" Type="Self.competences" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="compparent" Type="Self.compparent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="competences">
+        <PropertyRef Name="Competence_id" />
+      </Principal>
+      <Dependent Role="compparent">
+        <PropertyRef Name="CompParent_SonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COMPPAR2">
+    <End Role="competences" Type="Self.competences" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="compparent" Type="Self.compparent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="competences">
+        <PropertyRef Name="Competence_id" />
+      </Principal>
+      <Dependent Role="compparent">
+        <PropertyRef Name="CompParent_FatherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COMPRESP">
+    <End Role="competences" Type="Self.competences" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="compresp" Type="Self.compresp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="competences">
+        <PropertyRef Name="Competence_id" />
+      </Principal>
+      <Dependent Role="compresp">
+        <PropertyRef Name="CompResp_CompId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COMPRESP2">
+    <End Role="professeurs" Type="Self.professeurs" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="compresp" Type="Self.compresp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="professeurs">
+        <PropertyRef Name="Professeur_id" />
+      </Principal>
+      <Dependent Role="compresp">
+        <PropertyRef Name="CompResp_ProfId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COURSETUD1">
+    <End Role="cours" Type="Self.cours" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="coursetud" Type="Self.coursetud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cours">
+        <PropertyRef Name="Cours_id" />
+      </Principal>
+      <Dependent Role="coursetud">
+        <PropertyRef Name="CoursEtud_CoursId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COURSETUD2">
+    <End Role="etudiants" Type="Self.etudiants" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="coursetud" Type="Self.coursetud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="etudiants">
+        <PropertyRef Name="identifiant" />
+      </Principal>
+      <Dependent Role="coursetud">
+        <PropertyRef Name="CoursEtud_EtudiantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COURSRESP">
+    <End Role="cours" Type="Self.cours" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="coursprof" Type="Self.coursprof" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cours">
+        <PropertyRef Name="Cours_id" />
+      </Principal>
+      <Dependent Role="coursprof">
+        <PropertyRef Name="CoursProf_CoursId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COURSRESP2">
+    <End Role="professeurs" Type="Self.professeurs" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="coursprof" Type="Self.coursprof" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="professeurs">
+        <PropertyRef Name="Professeur_id" />
+      </Principal>
+      <Dependent Role="coursprof">
+        <PropertyRef Name="CoursProf_ProfId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище projet5ModelContainer">
+    <EntitySet Name="compcours" EntityType="Self.compcours" Schema="projet5" store:Type="Tables" />
+    <EntitySet Name="competences" EntityType="Self.competences" Schema="projet5" store:Type="Tables" />
+    <EntitySet Name="competud" EntityType="Self.competud" Schema="projet5" store:Type="Tables" />
+    <EntitySet Name="compparent" EntityType="Self.compparent" Schema="projet5" store:Type="Tables" />
+    <EntitySet Name="compresp" EntityType="Self.compresp" Schema="projet5" store:Type="Tables" />
+    <EntitySet Name="cours" EntityType="Self.cours" Schema="projet5" store:Type="Tables" />
+    <EntitySet Name="coursetud" EntityType="Self.coursetud" Schema="projet5" store:Type="Tables" />
+    <EntitySet Name="coursprof" EntityType="Self.coursprof" Schema="projet5" store:Type="Tables" />
+    <EntitySet Name="etudiants" EntityType="Self.etudiants" Schema="projet5" store:Type="Tables" />
+    <EntitySet Name="professeurs" EntityType="Self.professeurs" Schema="projet5" store:Type="Tables" />
+    <AssociationSet Name="fk_COMPCOURS1" Association="Self.fk_COMPCOURS1">
+      <End Role="cours" EntitySet="cours" />
+      <End Role="compcours" EntitySet="compcours" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COMPCOURS2" Association="Self.fk_COMPCOURS2">
+      <End Role="competences" EntitySet="competences" />
+      <End Role="compcours" EntitySet="compcours" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COMPETUD" Association="Self.fk_COMPETUD">
+      <End Role="competences" EntitySet="competences" />
+      <End Role="competud" EntitySet="competud" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COMPETUD2" Association="Self.fk_COMPETUD2">
+      <End Role="etudiants" EntitySet="etudiants" />
+      <End Role="competud" EntitySet="competud" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COMPPAR1" Association="Self.fk_COMPPAR1">
+      <End Role="competences" EntitySet="competences" />
+      <End Role="compparent" EntitySet="compparent" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COMPPAR2" Association="Self.fk_COMPPAR2">
+      <End Role="competences" EntitySet="competences" />
+      <End Role="compparent" EntitySet="compparent" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COMPRESP" Association="Self.fk_COMPRESP">
+      <End Role="competences" EntitySet="competences" />
+      <End Role="compresp" EntitySet="compresp" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COMPRESP2" Association="Self.fk_COMPRESP2">
+      <End Role="professeurs" EntitySet="professeurs" />
+      <End Role="compresp" EntitySet="compresp" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COURSETUD1" Association="Self.fk_COURSETUD1">
+      <End Role="cours" EntitySet="cours" />
+      <End Role="coursetud" EntitySet="coursetud" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COURSETUD2" Association="Self.fk_COURSETUD2">
+      <End Role="etudiants" EntitySet="etudiants" />
+      <End Role="coursetud" EntitySet="coursetud" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COURSRESP" Association="Self.fk_COURSRESP">
+      <End Role="cours" EntitySet="cours" />
+      <End Role="coursprof" EntitySet="coursprof" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COURSRESP2" Association="Self.fk_COURSRESP2">
+      <End Role="professeurs" EntitySet="professeurs" />
+      <End Role="coursprof" EntitySet="coursprof" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

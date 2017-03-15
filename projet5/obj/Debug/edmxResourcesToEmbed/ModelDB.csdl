@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projet5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="competence">
+    <Key>
+      <PropertyRef Name="Competence_id" />
+    </Key>
+    <Property Name="Competence_id" Type="Int32" Nullable="false" />
+    <Property Name="Semestre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="202" FixedLength="false" Unicode="false" />
+    <Property Name="WWW" Type="String" MaxLength="52" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="competuds" Relationship="Self.fk_COMPETUD" FromRole="competences" ToRole="competud" />
+    <NavigationProperty Name="cours" Relationship="Self.compcours" FromRole="competences" ToRole="cours" />
+    <NavigationProperty Name="competences1" Relationship="Self.compparent" FromRole="competences" ToRole="competences1" />
+    <NavigationProperty Name="competences" Relationship="Self.compparent" FromRole="competences1" ToRole="competences" />
+    <NavigationProperty Name="professeurs" Relationship="Self.compresp" FromRole="competences" ToRole="professeurs" />
+  </EntityType>
+  <EntityType Name="competud">
+    <Key>
+      <PropertyRef Name="CompEtud_CompetenceId" />
+      <PropertyRef Name="CompEtud_EtudiantId" />
+    </Key>
+    <Property Name="CompEtud_CompetenceId" Type="Int32" Nullable="false" />
+    <Property Name="CompEtud_EtudiantId" Type="Int32" Nullable="false" />
+    <Property Name="CompEtud_Etat" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="competence" Relationship="Self.fk_COMPETUD" FromRole="competud" ToRole="competences" />
+    <NavigationProperty Name="etudiant" Relationship="Self.fk_COMPETUD2" FromRole="competud" ToRole="etudiants" />
+  </EntityType>
+  <EntityType Name="cour">
+    <Key>
+      <PropertyRef Name="Cours_id" />
+    </Key>
+    <Property Name="Cours_id" Type="Int32" Nullable="false" />
+    <Property Name="Cours_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cours_lien" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Cours_desc" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="competences" Relationship="Self.compcours" FromRole="cours" ToRole="competences" />
+    <NavigationProperty Name="etudiants" Relationship="Self.coursetud" FromRole="cours" ToRole="etudiants" />
+    <NavigationProperty Name="professeurs" Relationship="Self.coursprof" FromRole="cours" ToRole="professeurs" />
+  </EntityType>
+  <EntityType Name="etudiant">
+    <Key>
+      <PropertyRef Name="identifiant" />
+    </Key>
+    <Property Name="identifiant" Type="Int32" Nullable="false" />
+    <Property Name="nom" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="prenom" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="annee" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="parcours" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="domaine" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="competuds" Relationship="Self.fk_COMPETUD2" FromRole="etudiants" ToRole="competud" />
+    <NavigationProperty Name="cours" Relationship="Self.coursetud" FromRole="etudiants" ToRole="cours" />
+  </EntityType>
+  <EntityType Name="professeur">
+    <Key>
+      <PropertyRef Name="Professeur_id" />
+    </Key>
+    <Property Name="Professeur_id" Type="Int32" Nullable="false" />
+    <Property Name="Professeur_prenom" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Professeur_nom" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Professeur_mail" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="Professeur_password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="competences" Relationship="Self.compresp" FromRole="professeurs" ToRole="competences" />
+    <NavigationProperty Name="cours" Relationship="Self.coursprof" FromRole="professeurs" ToRole="cours" />
+  </EntityType>
+  <Association Name="fk_COMPETUD">
+    <End Role="competences" Type="Self.competence" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="competud" Type="Self.competud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="competences">
+        <PropertyRef Name="Competence_id" />
+      </Principal>
+      <Dependent Role="competud">
+        <PropertyRef Name="CompEtud_CompetenceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_COMPETUD2">
+    <End Role="etudiants" Type="Self.etudiant" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="competud" Type="Self.competud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="etudiants">
+        <PropertyRef Name="identifiant" />
+      </Principal>
+      <Dependent Role="competud">
+        <PropertyRef Name="CompEtud_EtudiantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="compcours">
+    <End Role="cours" Type="Self.cour" Multiplicity="*" />
+    <End Role="competences" Type="Self.competence" Multiplicity="*" />
+  </Association>
+  <Association Name="compparent">
+    <End Role="competences" Type="Self.competence" Multiplicity="*" />
+    <End Role="competences1" Type="Self.competence" Multiplicity="*" />
+  </Association>
+  <Association Name="compresp">
+    <End Role="competences" Type="Self.competence" Multiplicity="*" />
+    <End Role="professeurs" Type="Self.professeur" Multiplicity="*" />
+  </Association>
+  <Association Name="coursetud">
+    <End Role="cours" Type="Self.cour" Multiplicity="*" />
+    <End Role="etudiants" Type="Self.etudiant" Multiplicity="*" />
+  </Association>
+  <Association Name="coursprof">
+    <End Role="cours" Type="Self.cour" Multiplicity="*" />
+    <End Role="professeurs" Type="Self.professeur" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="DbConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="competences" EntityType="Self.competence" />
+    <EntitySet Name="competuds" EntityType="Self.competud" />
+    <EntitySet Name="cours" EntityType="Self.cour" />
+    <EntitySet Name="etudiants" EntityType="Self.etudiant" />
+    <EntitySet Name="professeurs" EntityType="Self.professeur" />
+    <AssociationSet Name="fk_COMPETUD" Association="Self.fk_COMPETUD">
+      <End Role="competences" EntitySet="competences" />
+      <End Role="competud" EntitySet="competuds" />
+    </AssociationSet>
+    <AssociationSet Name="fk_COMPETUD2" Association="Self.fk_COMPETUD2">
+      <End Role="etudiants" EntitySet="etudiants" />
+      <End Role="competud" EntitySet="competuds" />
+    </AssociationSet>
+    <AssociationSet Name="compcours" Association="Self.compcours">
+      <End Role="cours" EntitySet="cours" />
+      <End Role="competences" EntitySet="competences" />
+    </AssociationSet>
+    <AssociationSet Name="compparent" Association="Self.compparent">
+      <End Role="competences" EntitySet="competences" />
+      <End Role="competences1" EntitySet="competences" />
+    </AssociationSet>
+    <AssociationSet Name="compresp" Association="Self.compresp">
+      <End Role="competences" EntitySet="competences" />
+      <End Role="professeurs" EntitySet="professeurs" />
+    </AssociationSet>
+    <AssociationSet Name="coursetud" Association="Self.coursetud">
+      <End Role="cours" EntitySet="cours" />
+      <End Role="etudiants" EntitySet="etudiants" />
+    </AssociationSet>
+    <AssociationSet Name="coursprof" Association="Self.coursprof">
+      <End Role="cours" EntitySet="cours" />
+      <End Role="professeurs" EntitySet="professeurs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
