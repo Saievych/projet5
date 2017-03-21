@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1c21e3763c684ddc8af0fbf12ef2480d" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="projet5Model.competence" Width="1.5" PointX="1.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projet5Model.competence" Width="1.5" PointX="2.875" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="projet5Model.competud" Width="1.5" PointX="0.5" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="projet5Model.cour" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="projet5Model.etudiant" Width="1.5" PointX="3.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="projet5Model.professeur" Width="1.5" PointX="5.375" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="projet5Model.cour" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projet5Model.etudiant" Width="1.5" PointX="3.125" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="projet5Model.professeur" Width="1.5" PointX="5.625" PointY="2.75" IsExpanded="true" />
         <AssociationConnector Association="projet5Model.fk_COMPETUD" ManuallyRouted="false" />
         <AssociationConnector Association="projet5Model.fk_COMPETUD2" ManuallyRouted="false" />
         <AssociationConnector Association="projet5Model.compcours" ManuallyRouted="false" />

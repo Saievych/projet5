@@ -8,6 +8,7 @@ namespace projet5.Models
 {
     public partial class Cours
     {
+        public int _id { get; set; }
         public string _nom { get; set; }
         public virtual ICollection<ReadCompetence> _competences { get; set; }
         public virtual ICollection<Professeur> _prof { get; set; }

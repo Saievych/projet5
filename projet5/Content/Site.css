@@ -83,7 +83,7 @@ textarea {
     left: 0;
     right: 0;
     display: block;
-    /*height: 95% !important*/;
+    /*height: 95% !important;*/
     width: 10%;
     height: calc(100vh - 75px); 
     overflow-y: auto;
@@ -124,35 +124,9 @@ textarea {
     border-radius: 7px;
 }
 
-/*.tooltip { /* стиль текста, наведя или нажав на который появится пояснение 
-  display: inline-block;
-  position: relative;
-  background: #E6E6E6; /* цвет фона 
-  text-indent: 0px;
-  cursor: help; /* вид курсора 
-}
-.tooltip > div { /* стиль появляющейся подсказки 
-  position: absolute;
-  bottom: 100%;
-  left: -20em; /* = max-width */
-  /*right: -20em; /* = max-width */
-  /*width: -moz-max-content;
-  width: -webkit-max-content;
-  width: max-content;  /* ширина подсказки может быть не более содержимого */
- /* max-width: 20em;  /* ширина подсказки может быть не более 20em */
- /* max-height: 80vh; /* необязательное ограничение по высоте подсказки, 1vh — это 1% от ширины окна */
-  /*overflow: auto;
-  visibility: hidden;
-  margin: 0 auto .4em; /* поднята на .4em над текстом, наведя или нажав на который появится пояснение */
-  /*padding: .3em;
-  border: solid rgb(200,200,200);
-  font-size: 90%;
-  background: #fff;
-  line-height: normal;
-  cursor: auto;
-}*/
 
- #tooltip {
+
+/* #tooltip {
 	background: #FFFFFF;
 	border: 1px solid #666666;
 	color: #333333;
@@ -160,4 +134,23 @@ textarea {
 	padding: 3px 5px;
 	position: absolute;
 	visibility: hidden;
-	}
+	}*/
+
+   .test + .tooltip > .tooltip-inner {
+      background-color: #73AD21; 
+      color: #FFFFFF; 
+      border: 1px solid green; 
+      padding: 3px;
+      font-size: 10px;
+  }
+  /* Tooltip on top */
+  .test + .tooltip.top > .tooltip-arrow {
+      border-top: 2px solid green;
+  }
+  /* Tooltip on bottom */
+  .test + .tooltip.bottom > .tooltip-arrow {
+      border-bottom: 2px solid blue;
+  }
+  .tooltip-inner {
+    white-space:pre-wrap;
+}

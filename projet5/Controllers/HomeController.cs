@@ -25,7 +25,6 @@ namespace projet5.Controllers
                                _parcours = etudiant.parcours,
                                _domaine = etudiant.domaine,
                                _mail = etudiant.mel,
-                               //_cours = etudiant.cours.ToList<cour>(),
                                _competuds = etudiant.competuds.ToList<competud>()
                            };
 
@@ -44,7 +43,6 @@ namespace projet5.Controllers
                 tmp._parcours = etud._parcours;
                 tmp._mail = etud._mail;
                 tmp._domaine = etud._domaine;
-                //tmp._competuds = etud._competuds.ToList<CompEtud>();
                 for (int i = 0; i < etud._cours.Count(); i++)
                 {
                     tmp._cours.Add(new ReadCours
@@ -59,10 +57,8 @@ namespace projet5.Controllers
                     tmp._competuds.Add(new ReadCompEtud_Etud
                     {
                         _CompetenceId = etud._competuds.ElementAt(i).CompEtud_CompetenceId,
-                        //_EtudiantId = etud._competuds.ElementAt(i).CompEtud_EtudiantId,
                         _Etat = etud._competuds.ElementAt(i).CompEtud_Etat
                     });
-                //tmp._cours = etud._cours;
                 switch (etud._annee)
                 {
                     case "L1":
@@ -81,7 +77,6 @@ namespace projet5.Controllers
                         TmpAnne.Find(q => q._anne == "M2")._etudiants.Add(tmp);
                         break;
                     default:
-                        //Console.WriteLine("Default case");
                         break;
                 }
             }
@@ -94,7 +89,7 @@ namespace projet5.Controllers
             List<Semestre> TmpSem = new List<Semestre>();
             List<Anne> TmpAnne = getEtudiants();
 
-            var Competence2 = from competences in db.competences
+            var competence = from competences in db.competences
                               select new DbCompetence
                               {
                                   _id = competences.Competence_id,
@@ -108,21 +103,18 @@ namespace projet5.Controllers
                                   
                               };
 
-          
             for (int i = 0; i < n; i++)
                 TmpSem.Add(new Semestre { _semestre = "S" + (i + 1).ToString(), });
-            foreach (DbCompetence comp in Competence2)
+            foreach (DbCompetence comp in competence)
             {
                 ReadCompetence tmp = new ReadCompetence();
                 tmp._code = comp._code;
                 tmp._description = comp._description;
                 tmp._id = comp._id;
                 tmp._link = comp._link;
-                //tmp._cours = comp._cours.First<cour>().Cours_nom;
                 for (int i = 0; i < comp._competuds.Count(); i++)
                     tmp._competuds.Add(new ReadCompEtud_Comp
                     {
-                        //_CompetenceId = comp._competuds.ElementAt(i).CompEtud_CompetenceId,
                         _EtudiantId = comp._competuds.ElementAt(i).CompEtud_EtudiantId,
                         _Etat = comp._competuds.ElementAt(i).CompEtud_Etat
                     });
@@ -137,13 +129,11 @@ namespace projet5.Controllers
                 switch (comp._semestre)
                 {
                     case "S1":
-                        //List<Cours> tmp_cours = new List<Cours>();
-                        //tmp_cours = TmpSem.Find(q => q._semestre == "S1")._cours.ToList();
-                        //if ()
                         if (TmpSem.Find(q => q._semestre == "S1")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom) == null)
                         {
                             Cours c = new Cours();
                             c._nom = comp._cours.First<cour>().Cours_nom;
+                            c._id = comp._cours.First<cour>().Cours_id;
                             c._competences.Add(tmp);
                             c._prof = null;
                             TmpSem.Find(q => q._semestre == "S1")._cours.Add(c);
@@ -151,7 +141,6 @@ namespace projet5.Controllers
                         else
                         {
                             TmpSem.Find(q => q._semestre == "S1")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                            //TmpSem.Find(q => q._semestre == "S1")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
                         }
                         break;
                     case "S2":
@@ -159,6 +148,7 @@ namespace projet5.Controllers
                         {
                             Cours c = new Cours();
                             c._nom = comp._cours.First<cour>().Cours_nom;
+                            c._id = comp._cours.First<cour>().Cours_id;
                             c._competences.Add(tmp);
                             c._prof = null;
                             TmpSem.Find(q => q._semestre == "S2")._cours.Add(c);
@@ -166,7 +156,6 @@ namespace projet5.Controllers
                         else
                         {
                             TmpSem.Find(q => q._semestre == "S2")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                            //TmpSem.Find(q => q._semestre == "S2")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
                         }
                         break;
                     case "S3":
@@ -174,6 +163,7 @@ namespace projet5.Controllers
                         {
                             Cours c = new Cours();
                             c._nom = comp._cours.First<cour>().Cours_nom;
+                            c._id = comp._cours.First<cour>().Cours_id;
                             c._competences.Add(tmp);
                             c._prof = null;
                             TmpSem.Find(q => q._semestre == "S3")._cours.Add(c);
@@ -181,7 +171,6 @@ namespace projet5.Controllers
                         else
                         {
                             TmpSem.Find(q => q._semestre == "S3")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                            //TmpSem.Find(q => q._semestre == "S3")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
                         }
                         break;
                     case "S4":
@@ -189,6 +178,7 @@ namespace projet5.Controllers
                         {
                             Cours c = new Cours();
                             c._nom = comp._cours.First<cour>().Cours_nom;
+                            c._id = comp._cours.First<cour>().Cours_id;
                             c._competences.Add(tmp);
                             c._prof = null;
                             TmpSem.Find(q => q._semestre == "S4")._cours.Add(c);
@@ -196,7 +186,6 @@ namespace projet5.Controllers
                         else
                         {
                             TmpSem.Find(q => q._semestre == "S4")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                            //TmpSem.Find(q => q._semestre == "S4")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
                         }
                         break;
                     case "S5":
@@ -204,6 +193,7 @@ namespace projet5.Controllers
                         {
                             Cours c = new Cours();
                             c._nom = comp._cours.First<cour>().Cours_nom;
+                            c._id = comp._cours.First<cour>().Cours_id;
                             c._competences.Add(tmp);
                             c._prof = null;
                             TmpSem.Find(q => q._semestre == "S5")._cours.Add(c);
@@ -211,7 +201,6 @@ namespace projet5.Controllers
                         else
                         {
                             TmpSem.Find(q => q._semestre == "S5")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                            //TmpSem.Find(q => q._semestre == "S5")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
                         }
                         break;
                     case "S6":
@@ -219,6 +208,7 @@ namespace projet5.Controllers
                         {
                             Cours c = new Cours();
                             c._nom = comp._cours.First<cour>().Cours_nom;
+                            c._id = comp._cours.First<cour>().Cours_id;
                             c._competences.Add(tmp);
                             c._prof = null;
                             TmpSem.Find(q => q._semestre == "S6")._cours.Add(c);
@@ -226,14 +216,14 @@ namespace projet5.Controllers
                         else
                         {
                             TmpSem.Find(q => q._semestre == "S6")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                            //TmpSem.Find(q => q._semestre == "S6")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
-                        }
+                              }
                         break;
                     case "S7":
                         if (TmpSem.Find(q => q._semestre == "S7")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom) == null)
                         {
                             Cours c = new Cours();
                             c._nom = comp._cours.First<cour>().Cours_nom;
+                            c._id = comp._cours.First<cour>().Cours_id;
                             c._competences.Add(tmp);
                             c._prof = null;
                             TmpSem.Find(q => q._semestre == "S7")._cours.Add(c);
@@ -241,7 +231,6 @@ namespace projet5.Controllers
                         else
                         {
                             TmpSem.Find(q => q._semestre == "S7")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                            //TmpSem.Find(q => q._semestre == "S7")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
                         }
                         break;
                     case "S8":
@@ -249,6 +238,7 @@ namespace projet5.Controllers
                         {
                             Cours c = new Cours();
                             c._nom = comp._cours.First<cour>().Cours_nom;
+                            c._id = comp._cours.First<cour>().Cours_id;
                             c._competences.Add(tmp);
                             c._prof = null;
                             TmpSem.Find(q => q._semestre == "S8")._cours.Add(c);
@@ -256,7 +246,6 @@ namespace projet5.Controllers
                         else
                         {
                             TmpSem.Find(q => q._semestre == "S8")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                            //TmpSem.Find(q => q._semestre == "S8")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
                         }
                         break;
                     case "S9":
@@ -264,6 +253,7 @@ namespace projet5.Controllers
                         {
                             Cours c = new Cours();
                             c._nom = comp._cours.First<cour>().Cours_nom;
+                            c._id = comp._cours.First<cour>().Cours_id;
                             c._competences.Add(tmp);
                             c._prof = null;
                             TmpSem.Find(q => q._semestre == "S9")._cours.Add(c);
@@ -271,14 +261,14 @@ namespace projet5.Controllers
                         else
                         {
                             TmpSem.Find(q => q._semestre == "S9")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                            //TmpSem.Find(q => q._semestre == "S9")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
-                        }
+                          }
                         break;
                     case "S10":
                         if (TmpSem.Find(q => q._semestre == "S10")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom) == null)
                         {
                             Cours c = new Cours();
                             c._nom = comp._cours.First<cour>().Cours_nom;
+                            c._id = comp._cours.First<cour>().Cours_id;
                             c._competences.Add(tmp);
                             c._prof = null;
                             TmpSem.Find(q => q._semestre == "S10")._cours.Add(c);
@@ -286,23 +276,13 @@ namespace projet5.Controllers
                         else
                         {
                             TmpSem.Find(q => q._semestre == "S10")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                            //TmpSem.Find(q => q._semestre == "S10")._cours.ToList().Find(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
                         }
                         break;
                     
                     default:
-                        //Console.WriteLine("Default case");
                         break;
                 }
             }
-
-
-            //int m = 
-            //    TmpAnne.Find((q => q._anne == "L1"))._etudiants.Count<ReadEtud>() + 
-            //    TmpAnne.Find((q => q._anne == "L2"))._etudiants.Count<ReadEtud>() +
-            //    TmpAnne.Find((q => q._anne == "L3"))._etudiants.Count<ReadEtud>() + 
-            //    TmpAnne.Find((q => q._anne == "M1"))._etudiants.Count<ReadEtud>() +
-            //    TmpAnne.Find((q => q._anne == "M2"))._etudiants.Count<ReadEtud>();
             var bdCours = from cour in db.cours
                           select new DbCours
                           {
@@ -329,10 +309,7 @@ namespace projet5.Controllers
              foreach(Semestre sem in TmpSem)
                     if ((sem._cours.ToList().Find(q => q._nom == cours._nom)) != null)
                         sem._cours.ToList().Find(q => q._nom == cours._nom)._prof = tmpCours._prof;
-                
-                //TmpSem.Find(q => q._cours.ToList().Find(f => f._nom == cours._nom));//._cours.ToList().Find(q => q._nom == cours._nom)._prof = tmpCours._prof;
             }
-          
             Notes.annes = TmpAnne;
             Notes.semesters = TmpSem;
             return Notes;
@@ -345,7 +322,7 @@ namespace projet5.Controllers
             List<JsonCompetence> TmpComp = new List<JsonCompetence>();
             List<Anne> TmpAnne = getEtudiants();
 
-            var Competence2 = from competences in db.competences
+            var competence = from competences in db.competences
                               select new DbCompetence
                               {
                                   _id = competences.Competence_id,
@@ -357,12 +334,11 @@ namespace projet5.Controllers
                                   _cours = competences.cours.ToList<cour>(),
                                   _professeurs = competences.professeurs.ToList<professeur>(),
                                   _competences_Son = competences.competences.ToList<competence>(),
-                                  _competences_Par = competences.competences1.ToList<competence>()
-                                  //_competences = competences.competences 
+                                  _competences_Par = competences.competences1.ToList<competence>() 
                               };
 
            
-            foreach (DbCompetence comp in Competence2)
+            foreach (DbCompetence comp in competence)
             {
                 JsonCompetence tmp = new JsonCompetence();
                 tmp._code = comp._code;
@@ -371,52 +347,27 @@ namespace projet5.Controllers
                 tmp._link = comp._link;
                 tmp._semestre = comp._semestre; 
                 tmp._cours = comp._cours.First<cour>().Cours_nom;
-                //for (int i = 0; i < comp._competuds.Count(); i++)
-                //    tmp._competuds.Add(new ReadCompEtud_Comp
-                //    {
-                //        //_CompetenceId = comp._competuds.ElementAt(i).CompEtud_CompetenceId,
-                //        _EtudiantId = comp._competuds.ElementAt(i).CompEtud_EtudiantId,
-                //        _Etat = comp._competuds.ElementAt(i).CompEtud_Etat
-                //    });
                 for (int i = 0; i < comp._competences_Par.Count(); i++)
                     tmp._competences_Par.Add(new CompRelation
                     {
-                        //_CompetenceId = comp._competuds.ElementAt(i).CompEtud_CompetenceId,
                         _id = comp._competences_Par.ElementAt(i).Competence_id,
                         _code = comp._competences_Par.ElementAt(i).Code
                     });
                 for (int i = 0; i < comp._competences_Son.Count(); i++)
                     tmp._competences_Son.Add(new CompRelation
                     {
-                        //_CompetenceId = comp._competuds.ElementAt(i).CompEtud_CompetenceId,
                         _id = comp._competences_Son.ElementAt(i).Competence_id,
                         _code = comp._competences_Son.ElementAt(i).Code
                     });
-                //List<Professeur> tmp_prof = new List<Professeur>();
                 for (int i = 0; i < comp._professeurs.Count(); i++)
                     tmp._prof.Add(new Professeur
                     {
-                        //_CompetenceId = comp._competuds.ElementAt(i).CompEtud_CompetenceId,
                         Professeur_id = comp._professeurs.ElementAt(i).Professeur_id,
                         Professeur_nom = comp._professeurs.ElementAt(i).Professeur_nom,
                         Professeur_prenom =comp._professeurs.ElementAt(i).Professeur_prenom
                     });
                 
-                    //case "S1":
-                    //        if (TmpSem.Find(q => q._semestre == "S1")._cours.First(f => f._nom == comp._cours.First<cour>().Cours_nom) == null)
-                    //{
-                    //    Cours c = new Cours();
-                    //    c._nom = comp._cours.First<cour>().Cours_nom;
-                    //    c._competences.Add(tmp);
-                    //    c._prof = tmp_prof;
-                    //    TmpSem.Find(q => q._semestre == "S1")._cours.Add(c);
-                    //}
-                    //else
-                    //{
-                    //    TmpSem.Find(q => q._semestre == "S1")._cours.First(f => f._nom == comp._cours.First<cour>().Cours_nom)._competences.Add(tmp);
-                    //    TmpSem.Find(q => q._semestre == "S1")._cours.First(f => f._nom == comp._cours.First<cour>().Cours_nom)._prof = tmp_prof;
-                    //}
-                    //break;
+                  
                     TmpComp.Add(tmp);
                 
             }
@@ -441,11 +392,9 @@ namespace projet5.Controllers
         {
             System.Web.Script.Serialization.JavaScriptSerializer oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             string sJSON = oSerializer.Serialize(getJson());
-            //ViewDataDictionary viewData = new ViewDataDictionary();
-            //viewData.Add("notes", getData());
-            //ViewBag.VB = Server.HtmlDecode(sJSON);
+
             ViewBag.VB = sJSON;
-            CompNotes test = getData();
+           CompNotes test = getData();
             return View(getData());
     }
 

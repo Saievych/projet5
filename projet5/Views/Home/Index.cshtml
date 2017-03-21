@@ -3,48 +3,51 @@
 <script type="text/javascript" src="~/Scripts/MyScripts/Competences.js" charset="utf-8" ></script>
 <script type="text/javascript" src="~/Scripts/MyScripts/tooltip.js"></script>
 <script type="text/html" id="data" charset="utf-8">
-   @Html.Raw(ViewBag.VB)
-</script>
-@{ 
-ViewBag.Title = "Projet5";
-}
-@using projet5.Models
-<div id="page" style="display:block">
-    <header>
-        <div class="container-fluid col-sm-12 col-md-12 col-lg-12" id="header">
-            @*<div id="title">
-                <label for="title">Diagramme des compétences : Licence/Master SPI acoustique</label>
-            </div>*@
-            <div class="text-center title">Diagramme des compétences : Licence/Master SPI acoustique</div>
-            <div class="container-fluid row legend"  >
-                <div class="legend" style="width: 90px">
-                    <div id="circleLg" style="background:darkgray"></div>
-                    <p>Non tentée</p>
-                </div>
-                <div class="legend" style="width: 65px">
-                    <div id="circleLg" style="background:red"></div>
-                    <p>Ratée</p>
-                </div>
-                <div class="legend" style="width: 130px">
-                    <div id="circleLg" style="background:darkorange"></div>
-                    <p>Presque réussie</p>
-                </div>
-                <div class="legend" style="width: 80px">
-                    <div id="circleLg" style="background:lime"></div>
-                    <p>Réussie</p>
-                </div>
-                <div class="legend" style="width: 75px">
-                    <div id="circleLg" style="background:magenta"></div>
-                    <p>Requis</p>
-                </div>
-                <div class="legend" style="width: 100px">
-                    <div id="circleLg" style="background:blue"></div>
-                    <p>Permet de</p>
-                 </div>
 
-               </div>
-        </div>
-    </header>
+
+
+        @Html.Raw(ViewBag.VB)
+    </script>
+    @{
+        ViewBag.Title = "Projet5";
+    }
+    @using projet5.Models
+    <div id="page" style="display:block">
+        <header>
+            <div class="container-fluid col-sm-12 col-md-12 col-lg-12" id="header">
+                @*<div id="title">
+                        <label for="title">Diagramme des compétences : Licence/Master SPI acoustique</label>
+                    </div>*@
+                <div class="text-center title">Diagramme des compétences : Licence/Master SPI acoustique</div>
+                <div class="container-fluid row legend">
+                    <div class="legend" style="width: 90px">
+                        <div id="circleLg" style="background:darkgray"></div>
+                        <p>Non tentée</p>
+                    </div>
+                    <div class="legend" style="width: 65px">
+                        <div id="circleLg" style="background:red"></div>
+                        <p>Ratée</p>
+                    </div>
+                    <div class="legend" style="width: 130px">
+                        <div id="circleLg" style="background:darkorange"></div>
+                        <p>Presque réussie</p>
+                    </div>
+                    <div class="legend" style="width: 80px">
+                        <div id="circleLg" style="background:lime"></div>
+                        <p>Réussie</p>
+                    </div>
+                    <div class="legend" style="width: 75px">
+                        <div id="circleLg" style="background:magenta"></div>
+                        <p>Requis</p>
+                    </div>
+                    <div class="legend" style="width: 100px">
+                        <div id="circleLg" style="background:blue"></div>
+                        <p>Permet de</p>
+                    </div>
+
+                </div>
+            </div>
+        </header>
         <main>
 
             <div id="main" class="container-fluid row" style="float: left; margin-left:2px">
@@ -53,15 +56,20 @@ ViewBag.Title = "Projet5";
                 switch (sem._semestre)
                 {
                     case "S1":
-                            <div id=@sem._semestre class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester" >
-                                <label for=@sem._semestre class="text-center">Semestre1</label>
+                            <div id="@sem._semestre" class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
+                                <label for="@sem._semestre" class="text-center">Semestre1</label>
                                 @foreach (Cours cours in sem._cours)
                                 {
-                                    <div id=@cours._nom class="row course center" tooltip=@cours._nom >
+                                    @*<script type="text/html" id="data" charset="utf-8">
+                                        @Html.Raw(cours._nom)
+                                    </script>*@
+                                    
+                                    <div id="cours_@(cours._id)" class="row course center test" data-toggle="tooltip"  data-placement="bottom"  data-html="true" title="@Html.Raw(cours._nom)">
                                         @foreach (ReadCompetence comp in cours._competences)
                                         {
-                                            string tmp = comp._code + "/n" + comp._description;
-                                            <div class="circle" id=@comp._id tooltip=@tmp></div>
+
+
+                                            <div class="circle test" id="@comp._id" data-toggle="tooltip"  data-placement="top" title="@Html.Raw(comp._code)"></div>
                                         }
                                     </div>
                                 }
@@ -70,135 +78,144 @@ ViewBag.Title = "Projet5";
                             @*<li><a id=@comp._id @*href=@comp._link> @comp._code</a></li>*@
 
                 case "S2":
-                    <div id=@sem._semestre class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester" >
-                        <label for=@sem._semestre class="center">Semestre2</label>
+                    <div id="@sem._semestre" class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
+                        <label for="@sem._semestre" class="center">Semestre2</label>
                         @foreach (Cours cours in sem._cours)
                         {
-                            <div id=@cours._nom class="row course center" tooltip=@cours._nom>
+                            <div id="cours_@(cours._id)" class="row course center test" data-toggle="tooltip" data-placement="bottom" data-html="true" title="@Html.Raw(cours._nom)">
                                 @foreach (ReadCompetence comp in cours._competences)
-                            {
-                                    <div class="circle" id=@comp._id ></div>
-                                    @*<a id=@comp._id>@comp._code</a>*@
+                                {
+
+
+                                    <div class="circle test" id="@comp._id" data-toggle="tooltip" data-placement="top" title="@Html.Raw(comp._code)"></div>
                                 }
                             </div>
                         }
                     </div>
                     break;
                 case "S3":
-                    <div id=@sem._semestre class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester" >
-                        <label for=@sem._semestre class="center">Semestre3</label>
+                    <div id="@sem._semestre" class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
+                        <label for="@sem._semestre" class="center">Semestre3</label>
                         @foreach (Cours cours in sem._cours)
                         {
-                            <div id=@cours._nom class="row course center" tooltip=@cours._nom>
+                            <div id="cours_@(cours._id)" class="row course center test" data-toggle="tooltip" data-placement="bottom" data-html="true" title="@Html.Raw(cours._nom)">
                                 @foreach (ReadCompetence comp in cours._competences)
-                            {
-                                    <div class="circle" id=@comp._id></div>
-                                    @*<a id=@comp._id>@comp._code</a>*@
+                                {
+
+
+                                    <div class="circle test" id="@comp._id" data-toggle="tooltip" data-placement="top" title="@Html.Raw(comp._code)"></div>
                                 }
                             </div>
                         }
                     </div>
                             break;
                         case "S4":
-                            <div id=@sem._semestre class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester" >
-                                <label for=@sem._semestre class="center">Semestre4</label>
+                            <div id="@sem._semestre" class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
+                                <label for="@sem._semestre" class="center">Semestre4</label>
                                 @foreach (Cours cours in sem._cours)
                                 {
-                                    <div id=@cours._nom class="row course center" tooltip=@cours._nom>
+                                    <div id="cours_@(cours._id)" class="row course center test" data-toggle="tooltip" data-placement="bottom" data-html="true" title="@Html.Raw(cours._nom)">
                                         @foreach (ReadCompetence comp in cours._competences)
-                            {
-                                            <div class="circle" id=@comp._id></div>
-                                            @*<a id=@comp._id>@comp._code</a>*@
+                                        {
+
+
+                                            <div class="circle test" id="@comp._id" data-toggle="tooltip" data-placement="top" title="@Html.Raw(comp._code)"></div>
                                         }
                                     </div>
                                 }
                             </div>
                             break;
                         case "S5":
-                            <div id=@sem._semestre class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester" >
-                                <label for=@sem._semestre class="center">Semestre5</label>
+                            <div id="@sem._semestre" class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
+                                <label for="@sem._semestre" class="center">Semestre5</label>
                                 @foreach (Cours cours in sem._cours)
                                 {
-                                    <div id=@cours._nom class="row course center" tooltip=@cours._nom>
+                                    <div id="cours_@(cours._id)" class="row course center test" data-toggle="tooltip" data-placement="bottom" data-html="true" title="@Html.Raw(cours._nom)">
                                         @foreach (ReadCompetence comp in cours._competences)
-                            {
-                                            <div class="circle" id=@comp._id></div>
-                                            @*<a id=@comp._id>@comp._code</a>*@
+                                        {
+
+
+                                            <div class="circle test" id="@comp._id" data-toggle="tooltip" data-placement="top" title="@Html.Raw(comp._code)"></div>
                                         }
                                     </div>
                                 }
                             </div>
                             break;
                         case "S6":
-                            <div id=@sem._semestre class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester" >
-                                <label for=@sem._semestre class="center">Semestre6</label>
+                            <div id="@sem._semestre" class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
+                                <label for="@sem._semestre" class="center">Semestre6</label>
                                 @foreach (Cours cours in sem._cours)
                                 {
-                                    <div id=@cours._nom class="row course center" tooltip=@cours._nom>
+                                    <div id="cours_@(cours._id)" class="row course center test" data-toggle="tooltip" data-placement="bottom" data-html="true" title="@Html.Raw(cours._nom)">
                                         @foreach (ReadCompetence comp in cours._competences)
-                            {
-                                            <div class="circle" id=@comp._id></div>
-                                            @*<a id=@comp._id>@comp._code</a>*@
+                                        {
+
+
+                                            <div class="circle test" id="@comp._id" data-toggle="tooltip" data-placement="top" title="@Html.Raw(comp._code)"></div>
                                         }
                                     </div>
                                 }
                             </div>
                             break;
                         case "S7":
-                            <div id=@sem._semestre class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester" >
-                                <label for=@sem._semestre class="center">Semestre7</label>
+                            <div id="@sem._semestre" class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
+                                <label for="@sem._semestre" class="center">Semestre7</label>
                                 @foreach (Cours cours in sem._cours)
                                 {
-                                    <div id=@cours._nom class="row course center" tooltip=@cours._nom>
+                                    <div id="cours_@(cours._id)" class="row course center test" data-toggle="tooltip" data-placement="bottom" data-html="true" title="@Html.Raw(cours._nom)">
                                         @foreach (ReadCompetence comp in cours._competences)
-                            {
-                                            <div class="circle" id=@comp._id></div>
-                                            @*<a id=@comp._id>@comp._code</a>*@
+                                        {
+
+
+                                            <div class="circle test" id="@comp._id" data-toggle="tooltip" data-placement="top" title="@Html.Raw(comp._code)"></div>
                                         }
                                     </div>
                                 }
                             </div>
                             break;
                         case "S8":
-                            <div id=@sem._semestre class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester" >
-                                <label for=@sem._semestre class="center">Semestre8</label>
+                            <div id="@sem._semestre" class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
+                                <label for="@sem._semestre" class="center">Semestre8</label>
                                 @foreach (Cours cours in sem._cours)
                                 {
-                                    <div id=@cours._nom class="row course center" tooltip=@cours._nom>
+                                    <div id="cours_@(cours._id)" class="row course center test" data-toggle="tooltip" data-placement="bottom" data-html="true" title="@Html.Raw(cours._nom)">
                                         @foreach (ReadCompetence comp in cours._competences)
-                            {
-                                            <div class="circle" id=@comp._id></div>
-                                            @*<a id=@comp._id>@comp._code</a>*@
+                                        {
+
+
+                                            <div class="circle test" id="@comp._id" data-toggle="tooltip" data-placement="top" title="@Html.Raw(comp._code)"></div>
                                         }
                                     </div>
                                 }
                             </div>
                             break;
                         case "S9":
-                            <div id=@sem._semestre class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
-                                <label for=@sem._semestre class="center">Semestre9</label>
+                            <div id="@sem._semestre" class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
+                                <label for="@sem._semestre" class="center">Semestre9</label>
                                 @foreach (Cours cours in sem._cours)
                                 {
-                                    <div id=@cours._nom class="row course center" tooltip=@cours._nom>
+                                    <div id="cours_@(cours._id)" class="row course center test" data-toggle="tooltip" data-placement="bottom" data-html="true" title="@Html.Raw(cours._nom)">
                                         @foreach (ReadCompetence comp in cours._competences)
-                            {
-                                            <div class="circle" id=@comp._id></div>
-                                            @*<a id=@comp._id>@comp._code</a>*@
+                                        {
+
+
+                                            <div class="circle test" id="@comp._id" data-toggle="tooltip" data-placement="top" title="@Html.Raw(comp._code)"></div>
                                         }
                                     </div>
                                 }
                             </div>
                             break;
                         case "S10":
-                            <div id=@sem._semestre class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester" >
-                                <label for=@sem._semestre class="center">Semestre10</label>
+                            <div id="@sem._semestre" class="col-sm-1 col-md-1 col-lg-1  panel panel-success semester">
+                                <label for="@sem._semestre" class="center">Semestre10</label>
                                 @foreach (Cours cours in sem._cours)
                                 {
-                                    <div id=@cours._nom class="row course center" tooltip=@cours._nom>
+                                    <div id="cours_@(cours._id)" class="row course center test" data-toggle="tooltip" data-placement="bottom" data-html="true" title="@Html.Raw(cours._nom)">
                                         @foreach (ReadCompetence comp in cours._competences)
-                            {
-                                            <div class="circle" id=@comp._id></div>
-                                            @*<a id=@comp._id>@comp._code</a>*@
+                                        {
+
+
+                                            <div class="circle test" id="@comp._id" data-toggle="tooltip" data-placement="top" title="@Html.Raw(comp._code)"></div>
                                         }
                                     </div>
                                 }
@@ -208,21 +225,25 @@ ViewBag.Title = "Projet5";
                     }
                 }
             </div>
-            <div id="tooltip" style="left: -91px; top: -91px; visibility: hidden;">Tooltip</div>
         </main>
-            <footer>
-                <div class="container-fluid col-sm-12 col-md-12 col-lg-12" id="footer">
-                    <select id="anne">
-                        @*autofocus accesskey="c"*@
-                        <option selected value="default">---</option>
-                        <option value="L1">L1</option>
-                        <option value="L2">L2</option>
-                        <option value="L3">L3</option>
-                        <option value="M1">M1</option>
-                        <option value="M2">M2</option>
-                    </select>
-                    <select id="etudiants" />
-                </div>
-    </footer>
-    
-</div>
+        <footer>
+            <div class="container-fluid col-sm-12 col-md-12 col-lg-12" id="footer">
+                <select id="anne">
+                    @*autofocus accesskey="c"*@
+                    <option selected value="default">---</option>
+                    <option value="L1">L1</option>
+                    <option value="L2">L2</option>
+                    <option value="L3">L3</option>
+                    <option value="M1">M1</option>
+                    <option value="M2">M2</option>
+                </select>
+                <select id="etudiants" />
+            </div>
+        </footer>
+
+    </div>
+<script>
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
