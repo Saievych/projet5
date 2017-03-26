@@ -14,11 +14,15 @@
     @using projet5.Models
     <div id="page" style="display:block">
         <header>
-            <div class="container-fluid col-sm-12 col-md-12 col-lg-12" id="header">
+           
+            <div class="container-fluid col-sm-10 col-md-10 col-lg-10" id="header">
+                <div style="position: absolute; top: 0%; right: 0; ">
+                    <img style="width:121px; height:68px;" src="http://www.univ-lemans.fr/skins/um2016/resources/um_img/LOGO_UM_lemansLaval.png">
+                </div>
                 @*<div id="title">
                         <label for="title">Diagramme des compétences : Licence/Master SPI acoustique</label>
                     </div>*@
-                <div class="text-center title">Diagramme des compétences : Licence/Master SPI acoustique</div>
+                <div class="text-center title" style="position: absolute; top: 0%; left:30%"><p class="crop">Diagramme des compétences : Licence/Master SPI acoustique</p></div>
                 <div class="container-fluid row legend">
                     <div class="legend" style="width: 90px">
                         <div id="circleLg" style="background:darkgray"></div>
@@ -50,7 +54,7 @@
         </header>
         <main>
 
-            <div id="main" class="container-fluid row" style="float: left; margin-left:2px">
+            <div id="main" class="container-fluid row " style="float: left; margin-left:2px">
                 @foreach (Semestre sem in ViewData.Model.semesters)
             {
                 switch (sem._semestre)
@@ -227,7 +231,7 @@
             </div>
         </main>
         <footer>
-            <div class="container-fluid col-sm-12 col-md-12 col-lg-12" id="footer">
+            <div class="container-fluid col-sm-10 col-md-10 col-lg-10" id="footer">
                 <select id="anne">
                     @*autofocus accesskey="c"*@
                     <option selected value="default">---</option>
@@ -238,6 +242,9 @@
                     <option value="M2">M2</option>
                 </select>
                 <select id="etudiants" />
+                <div style="position: absolute; bottom: 0%; right: 0; ">
+                   <p>Author:Saievych Ihor</p>
+                </div>
             </div>
         </footer>
 

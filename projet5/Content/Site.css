@@ -37,15 +37,23 @@ textarea {
 
 #header{
     padding: 2.5%;
-    background: #d1d4d9;
+    background: #EBF2FA;
     border: 1px solid #000;
     height: auto;
     width: 100%;
     z-index: 5;
     margin-bottom: 1px;
 }
-
-/*title{
+.crop{
+    font-size:20px;
+    font-weight: 600; 
+     word-wrap: break-word;
+     -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+     -ms-hyphens: auto;
+     hyphens: auto;
+}
+/*.title{
     padding-right: 0;
     padding-left: 0;
     margin: auto;
@@ -91,7 +99,7 @@ textarea {
 
 .course{
    cursor: pointer;
-   background: greenyellow;
+   background: #9EE37D;
    top: -10px;
    margin-top: 25px;
    border-radius: 5px;

@@ -55,7 +55,7 @@
 
     }
     //ShowEtud();
-    alert('ok');
+    //alert('ok');
 
 });
 //function giveLayout(e) {
